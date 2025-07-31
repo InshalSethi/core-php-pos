@@ -1,0 +1,87 @@
+.head{
+	display: none;
+}
+.black-color{
+	color: black;
+}
+.invoice-heading{
+	border-bottom: 3px solid grey;
+}
+.customer-basic{
+	margin-top: 20px;
+}
+.inline{
+	display: inline-block;
+}
+.flot-rt{
+	float: right!important;
+}
+.basic-fnt{
+	font-size: 16px;
+}
+.bln-fn{
+	font-size: 19px;
+	font-weight: 500;
+}
+.basic-fnt1{
+	font-size: 18px;
+	font-weight: bold;
+}
+.table-bordered th, .table-bordered td{
+    border: 1.5px solid #7e7e7e;
+}
+.set-padd{
+	padding: 0px !important;
+}
+.tbl-head{
+	background: #c0c0c07d !important;
+	width: 10% !important;
+}
+.font-bold{
+	font-weight: bold !important;
+}
+.receipt-set{
+	margin-top: 30px;
+}
+.border-tp{
+	border-top: 1px solid black;
+}
+.no-mr-btm{
+	margin-bottom: 0px;
+}
+.pr-date{
+	margin-left: 60px;
+}
+.sign{
+	margin-right: 60px;
+}
+.fot-set{
+	margin-top: 50px;
+}
+.white-clr{
+	color: white;
+}
+.bold{
+	font-weight: 600;
+}
+.cl-nm{
+	width: 15% !important;
+}
+.remark-dv{
+	width: 15% !important;
+}
+.in-no{
+	width: 45% !important;
+}
+.serv-dv{
+	width: 6% !important;
+}
+.date-dv{
+	width: 8% !important;
+}
+.emp-nm{
+	width: 5% !important;
+}
+.wor-st{
+	width: 5% !important;
+}

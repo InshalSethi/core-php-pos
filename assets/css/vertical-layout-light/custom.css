@@ -1,0 +1,299 @@
+
+    /*new yes no*/
+  .switch {
+    position: relative;
+    margin: 2px auto;
+    width: 180px;
+    height: 40px;
+    border: 1px solid #00000038;
+    color: black;
+    font-size: 25px;
+    border-radius: 4px;
+  }
+  .pad-fnt{
+    padding-top: 4px;
+  }
+  .quality {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    line-height: 40px;
+  }
+  .quality:first-child label {
+    border-radius: 0px 0 0 0px;
+  }
+  .quality:last-child label {
+    border-radius: 0 0px 0px 0;
+  }
+  .quality label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    font-style: normal;
+    text-align: center;
+    transition: transform 0.4s, color 0.4s, background-color 0.4s;
+  }
+  .quality input[type="radio"] {
+    appearance: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  .quality input[type="radio"]:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+  .quality input[type="radio"]:checked ~ label {
+    background-color: #6da252;
+    color: white;
+  }
+  .quality input[type="radio"]:active ~ label {
+    transform: scale(1.05);
+  }
+    /*switch style*/
+  .custom-control-label::before{
+    background-color: #ff4141;
+    border: #ff4141 solid 1px;
+  }
+  .custom-control-input:checked ~ .custom-control-label::before{
+    border-color: #6da252;
+    background-color: #6da252;
+  }
+    /*switch style end*/
+  .input-group-append .input-group-text, .input-group-prepend .input-group-text{
+    color: #555!important;
+  }
+  .input-group-text{
+    background-color: white!important;
+  }
+  .action-set{
+    width: 37px!important;
+    padding: 0px!important;
+    height: 18px!important;
+    background: #6da252!important;
+    color: white!important;
+    border: 1px solid #80808078!important;
+  }
+  .bg-grey{
+    background: #ecf0f8!important;
+  }
+  .bd-mac-green{
+    background: #6da252!important;
+    color: white!important;
+    border-color: #6da252;
+  }
+  .set-card-body{
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+  }
+  .inner{
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  .btn-set{
+    padding:5px;
+  }
+  .btn-save-color{
+    background: #6da252;
+    border-color: #6da252;
+    color: white;
+  }
+  .in-grp{
+    padding:10px!important;
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .btn-right{
+    float: right;
+  }
+  .btm-mr{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .add-more-set{
+    padding: 5px;
+  }
+  .white{
+    color: white!important;
+  }
+  .nav-pills.nav-pills-custom .nav-link.active{
+    background:#6da252!important;
+  }
+  .nav-pills{
+    padding-bottom: 5px!important;
+  }
+  .content-wrapper{
+    padding-top: 0px!important;
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .tab-content{
+    padding-top: 0px!important;
+  }
+  input {
+    padding: 5px!important;
+
+  }
+  .col-form-label{
+    font-weight: 500;
+    padding: 5px!important;
+    padding-bottom: 0px!important;
+    margin-bottom: .1rem!important;
+  }
+  .form-group{
+    margin-bottom: 0.1rem!important;
+  }
+  .set-check-col{
+    padding-right: 5px!important;
+  }
+  .set-th-padding{
+    padding: 2px!important
+  }
+  .set-td-padding{
+    padding: 2px!important
+  }
+  .set-th-font{
+    font-weight: 600!important;
+  }
+  /*Toggle Button*/
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 71px;
+    height: 31px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ff4141;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2a9643;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  /*Modal Edit Setting*/
+  .modal .modal-dialog{
+    margin-top: 10px!important;
+  }
+  .modal .modal-dialog .modal-content .modal-body {
+    padding: 0px 10px!important;
+  }
+  .modal .modal-dialog .modal-content .modal-header {
+    padding: 10px 26px!important;
+  }
+    .set-card-body{
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+  }
+  .set-mr-btm{
+    margin-bottom: 10px;
+  }
+  .no-mar-btm{
+    margin-bottom: 0px!important;
+  }
+  .clr{
+    color: white!important;
+  }
+  .advance-search-main{
+    background: #ecf0f8;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(92, 59, 196, 0.14), 0 3px 1px -2px rgba(92, 59, 196, 0.2), 0 1px 5px 0 rgba(92, 59, 196, 0.12);
+  }
+  .advance-search-row{
+    margin-bottom: 5px;
+  }
+  .advance-lable-padding{
+    padding: 0px!important;
+  }
+  .advance-input-padding{
+    padding: 5px!important;
+  }
+  .advance-search-radio{
+    margin-left: 25px;
+    margin-top: 5px;
+  }
+  .no-side-padding{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+  }
+  .no-side-padding-first{
+    padding-right: 0px!important;
+  }
+  .no-side-padding-last{
+    padding-left: 0px!important;
+  }
+  .set-tbl{
+    overflow-x: hidden;
+  }
+  @media only screen and (min-width: 320px) and (max-width: 480px){
+    .no-side-padding{
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+  .no-side-padding-first{
+    padding-right: 15px!important;
+    padding-left: 15px!important;
+  }
+  .no-side-padding-last{
+    padding-right: 15px!important;
+    padding-left: 15px!important;
+  }
+  .set-tbl{
+    overflow-x: auto!important;
+  }
+  }

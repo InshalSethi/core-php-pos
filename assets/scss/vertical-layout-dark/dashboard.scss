@@ -1,0 +1,73 @@
+/* Dashboard */
+.pageheader-icons {
+    a {
+        padding: 0 12px;
+        i {
+            font-size: 1.5rem;
+            color: $body-color;
+        }
+        &:last-child {
+            border-left: 1px solid lighten($border-color,5%);
+        }
+        @media (max-width: 767px) {
+            &:last-child {
+                padding-left: 0;
+            }
+        }
+    }
+}
+.user-symbols {
+    width: 42px;
+    height: 42px;
+    color: $white;
+    text-align: center;
+    padding-top: 12px;
+    border-radius:100%;
+    font-size: 1rem;
+}
+.widget-dropdown-boreder-radius {
+    border-radius: $dropdown-border-radius;
+}
+.legend-label{
+    width: 14px;
+    height: 14px;
+    border-radius:100%;
+    display: inline-block;
+    margin-top: 7px;
+}
+.chart-legendsproduct {
+    ul {
+        margin-top: 20px;
+        margin-bottom: 0;
+        li {
+            width: 50%;
+            list-style: none;
+            float: left;
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            span {
+                width: 14px;
+                height: 14px;
+                border-radius:100%;
+                position: absolute;
+                left: 0;
+                top: 5px;
+            }
+            &:nth-child(3),
+            &:nth-child(4) {
+                margin-bottom: 0;
+            }
+        }
+        &:after{
+            content: '';
+            width: 100%;
+            display: block;
+            clear: both;
+        }
+        
+    }
+}
+.circle-progress-dimension {
+    width: 72px;
+}

@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="<?php echo baseurl('assets/vendors/jquery-toast-plugin/jquery.toast.min.css');?>">

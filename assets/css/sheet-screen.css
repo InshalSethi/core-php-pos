@@ -1,0 +1,30 @@
+.outer{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.pg-head{
+	font-weight: 600;
+	font-size: 20px;
+}
+.st-th{
+	padding: 10px !important;
+    font-weight: 600 !important;
+}
+.st-td{
+	padding:5px !important;
+}
+.flt-l{
+	float: left;
+}
+.flt-r{
+	float: right;
+}
+.bold{
+	font-weight: 600;
+}
+.hd-u{
+	font-size: 14px;
+}
+.tx-co{
+	font-size: 14px;
+}

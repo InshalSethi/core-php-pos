@@ -1,0 +1,71 @@
+@page  
+{ 
+      /* auto is the initial value */ /*
+    size: landscape;*/
+
+    /* this affects the margin in the printer settings */ 
+    margin: 0mm 0mm 0mm 0mm;  
+} 
+/*Print Style Start*/
+@media print{
+.noprint{
+   visibility: hidden;
+   height: 0px;
+}
+#sidebar{
+	display: none;
+}
+#topnav{
+	display: none;
+}
+.navbar{
+	visibility: hidden;
+    height: 0px;
+}
+.footer{
+	display: none;
+}
+.content-wrapper{
+	padding-top: 0px;
+}
+.content-wrapper{
+	padding-left: 200px;
+    padding-right: 200px;
+}
+.page-body-wrapper{
+	padding-top: 0px;
+}
+.no-br-tp{
+	border-top: none !important;
+}
+.no-pad{
+	padding: 0px !important;
+}
+.fl-r{
+	float: right;
+}
+.mr-btm{
+	margin-bottom: 0px !important;
+}
+.fn-w{
+	font-weight: 600 !important;
+}
+.fn-h{
+	font-size: 17px !important;
+}
+.fn-co{
+	font-size: 15px;
+}
+.txt-de{
+	text-decoration: underline;
+}
+.table-bordered th, .table-bordered td{
+	border: 1px solid black !important;
+}
+.table.table-bordered, .jsgrid .table-bordered.jsgrid-table{
+	border: 1px solid black !important;
+}
+.rw-h{
+	height: 880px;
+}
+}

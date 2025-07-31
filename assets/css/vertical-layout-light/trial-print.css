@@ -1,0 +1,90 @@
+@page  
+{ 
+    size: A4;   /* A4 is the initial value */ 
+
+    /* this affects the margin in the printer settings */ 
+    margin: 10mm 0mm 12mm 0mm;  
+} 
+/*Print Style Start*/
+@media print{
+.noprint{
+   visibility: hidden;
+   height: 0px;
+   display: none;
+}
+.card{
+
+    border: none !important;
+}
+.head{
+	height: 100px !important;
+}
+.black-color{
+	color: black !important;
+}
+.invoice-heading{
+	border-bottom: 3px solid grey !important;
+}
+.customer-basic{
+	margin-top: 20px !important;
+}
+.inline{
+	display: inline-block !important;
+}
+.flot-rt{
+	float: right!important;
+}
+.basic-fnt{
+	font-size: 16px !important;
+}
+.bln-fn{
+	font-size: 19px !important;
+	font-weight: 500 !important;
+}
+.basic-fnt1{
+	font-size: 18px !important;
+	font-weight: bold !important;
+}
+.table-bordered th, .table-bordered td{
+    border: 1.5px solid #7e7e7e !important;
+}
+.set-padd{
+	padding: 7px!important;
+}
+.tbl-head{
+	background: #c0c0c07d !important;
+}
+.font-bold{
+	font-weight: bold !important;
+}
+.receipt-set{
+	margin-top: 30px !important;
+}
+.border-tp{
+	border-top: 1px solid black !important;
+}
+.no-mr-btm{
+	margin-bottom: 0px !important;
+}
+.pr-date{
+	margin-left: 60px !important;
+}
+.sign{
+	margin-right: 60px !important;
+}
+.fot-set{
+	margin-top: 50px !important;
+}
+.white-clr{
+	color: white !important;
+}
+.ln-br{
+	width: 100% !important;
+	position: fixed !important;
+	height: 200px !important;
+  	left: 0 !important;
+  	bottom: 0 !important;
+  	page-break-after: always !important;
+
+}
+}

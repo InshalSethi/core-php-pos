@@ -1,0 +1,33 @@
+.no-br-tp{
+	border-top: none !important;
+}
+.no-pad{
+	padding: 0px !important;
+}
+.mr-btm{
+	margin-bottom: 0px !important;
+}
+.fn-w{
+	font-weight: 600 !important;
+}
+.fl-r{
+	float: right;
+}
+.fn-h{
+	font-size: 17px !important;
+}
+.fn-co{
+	font-size: 15px;
+}
+.txt-de{
+	text-decoration: underline;
+}
+.table-bordered th, .table-bordered td{
+	border: 1px solid black !important;
+}
+.table.table-bordered, .jsgrid .table-bordered.jsgrid-table{
+	border: 1px solid black !important;
+}
+.rw-h{
+	height: 700px;
+}

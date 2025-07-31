@@ -1,0 +1,47 @@
+/*hello*/
+@page  
+{ 
+    size: auto;   /* auto is the initial value */ 
+
+    /* this affects the margin in the printer settings */ 
+    margin: 8mm 0mm 0mm 0mm;  
+} 
+/*Print Style Start*/
+@media print{
+
+.noprint{
+       visibility: hidden;
+       height: 0px;
+       display: none;
+}
+.outer{
+	padding-left: 30px !important;
+	padding-right: 30px !important;
+}
+.pg-head{
+	font-weight: 600 !important;
+	font-size: 20px !important;
+}
+.st-th{
+	padding: 5px !important;
+	font-weight: 600 !important;
+}
+.st-td{
+	padding:5px !important;
+}
+.flt-l{
+	float: left !important;
+}
+.flt-r{
+	float: right !important;
+}
+.bold{
+	font-weight: 600 !important;
+}
+.hd-u{
+	font-size: 14px !important;
+}
+.tx-co{
+	font-size: 14px !important;
+}
+}
