@@ -1,6 +1,6 @@
 <?php 
     $dbHost = 'localhost';
-    $dbUsername = 'sairauma_madina_clubroad_root';
-    $dbPassword = 'yKk8JndNATab';
+    $dbUsername = 'root';
+    $dbPassword = '';
     $dbName = 'sairauma_sairauma_madina_clubroad';
 ?>
