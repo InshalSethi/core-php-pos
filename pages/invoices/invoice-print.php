@@ -332,7 +332,7 @@
 
                                     <p class="no-mr-btm white-clr">.</p>
 
-                                    <p class="border-tp text-center black-color"><?php echo $company_name; ?></p>
+                                    <p class="border-tp text-center black-color"><?php echo $name; ?></p>
 
                                 </div>
 

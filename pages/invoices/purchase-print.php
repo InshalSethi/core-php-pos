@@ -22,10 +22,23 @@
     $db->where('pur_in_id',$in_id);
 
     $in_data=$db->getOne('tbl_purchase_invoice');
-    
 
+    // Get company data for header
+    $companydata = $db->getOne('company');
+    $company_name = ($companydata && isset($companydata['name'])) ? $companydata['name'] : 'Company Name';
 
-
+    // Get customer/supplier data
+    if ($in_data && isset($in_data['supplier_id'])) {
+        $db->where('cus_id', $in_data['supplier_id']);
+        $cusName = $db->getOne('tbl_customer');
+        $cus_name = ($cusName && isset($cusName['cus_name'])) ? $cusName['cus_name'] : 'Unknown Supplier';
+        $cus_phone = ($cusName && isset($cusName['cus_phone'])) ? $cusName['cus_phone'] : 'N/A';
+        $cus_city = ($cusName && isset($cusName['cus_city'])) ? $cusName['cus_city'] : 'N/A';
+    } else {
+        $cus_name = 'Unknown Supplier';
+        $cus_phone = 'N/A';
+        $cus_city = 'N/A';
+    }
 
     $db->where('pur_in_id',$in_id);
 
@@ -292,11 +305,11 @@
 
                             <tr>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $newDate = date("d-m-Y", strtotime($in_data['in_date'])); ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo ($in_data && isset($in_data['in_date'])) ? date("d-m-Y", strtotime($in_data['in_date'])) : 'N/A'; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">تاریخ</td>
 
-                              <td class="set-padd text-center tbl-con"><?php $db->where('cus_id',$in_data['supplier_id']); $cusName=$db->getOne('tbl_customer'); echo $cusName['cus_name']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo $cus_name; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">پارٹی کا نام</td>
 
@@ -304,11 +317,11 @@
 
                             <tr>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $in_data['inv_id']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo ($in_data && isset($in_data['invoice_num'])) ? $in_data['invoice_num'] : 'N/A'; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">بل نمبر</td>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $cusName['cus_phone']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo $cus_phone; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">فون نمبر</td>
 
@@ -320,7 +333,7 @@
 
                               <td class="set-padd text-center tbl-head bold"></td>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $cusName['cus_city']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo $cus_city; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">ایڈریس</td>
 
@@ -415,7 +428,7 @@
 
                             <tr>
 
-                              <td class="set-padd text-center tbl-head bold"><?php echo number_format($in_data['grand_total']); ?></td>
+                              <td class="set-padd text-center tbl-head bold"><?php echo ($in_data && isset($in_data['grand_total'])) ? number_format((float)$in_data['grand_total']) : '0'; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">کل رقم</td>
 
@@ -452,12 +465,8 @@
 
                       </div>
 
-                      <?php 
-
-                          $companydata = $db->getOne('company');
-
-                          $company_name = $companydata['name']; 
-
+                      <?php
+                          // Company data already loaded at the top of the file
                        ?>
 
                       

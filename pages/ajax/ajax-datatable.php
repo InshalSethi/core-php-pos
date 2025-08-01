@@ -72,7 +72,7 @@
 
       foreach($result as $res){
 
-        $grand_total +=$res['grand_total'];
+        $grand_total += (float)$res['grand_total'];
 
         $totalRecords++;;
 
@@ -238,7 +238,7 @@
 
         $totalRecords++;
 
-        $grand_total +=$res['grand_total']; 
+        $grand_total += (float)$res['grand_total'];
 
       }
 
@@ -844,11 +844,11 @@
 
         $totalRecords++;
 
-        $grand_total +=$res['grand_total'];        
+        $grand_total += (float)$res['grand_total'];
 
-        $total_paid+=$res['paid_amount'];
+        $total_paid += (float)$res['paid_amount'];
 
-        $total_pending+=$res['total_due'];
+        $total_pending += (float)$res['total_due'];
 
       }
 
@@ -1034,19 +1034,19 @@
 
         if($res['grand_total_w_dis'])
 
-        $grand_total +=$res['grand_total_w_dis'];  
+        $grand_total += (float)$res['grand_total_w_dis'];
 
-        if($res['paid_amount'])      
+        if($res['paid_amount'])
 
-        $total_paid+=$res['paid_amount'];
+        $total_paid += (float)$res['paid_amount'];
 
         if($res['total_dis'])
 
-        $total_discount+=$res['total_dis'];
+        $total_discount += (float)$res['total_dis'];
 
         if($res['total_due'])
 
-        $total_pending+=$res['total_due'];
+        $total_pending += (float)$res['total_due'];
 
       }
 
@@ -1357,11 +1357,11 @@
 
     $db->where('is_delete','0');
 
-    if($_POST['domain_id'] != ''){
+    if(isset($_POST['domain_id']) && $_POST['domain_id'] != ''){
 
         $db->where('tb_p.pro_domain',$_POST['domain_id']  );
 
-        
+
 
     }
 
@@ -1399,11 +1399,11 @@
 
     }
 
-    if($_POST['domain_id'] != ''){
+    if(isset($_POST['domain_id']) && $_POST['domain_id'] != ''){
 
         $db->where('tb_p.pro_domain',$_POST['domain_id']  );
 
-        
+
 
     }
 
@@ -1539,27 +1539,27 @@
 
     $db->where('is_delete','0');
 
-    if($_POST['domain_id'] != ''){
+    if(isset($_POST['domain_id']) && $_POST['domain_id'] != ''){
 
         $db->where('tb_p.pro_domain',$_POST['domain_id']  );
 
-        
+
 
     }
 
-    if($_POST['category_id'] != ''){
+    if(isset($_POST['category_id']) && $_POST['category_id'] != ''){
 
         $db->where('tb_p.category_id',$_POST['category_id']  );
 
-        
+
 
     }
 
-    if($_POST['brand_id'] != ''){
+    if(isset($_POST['brand_id']) && $_POST['brand_id'] != ''){
 
         $db->where('tb_p.company_name',$_POST['brand_id']  );
 
-        
+
 
     }
 
@@ -1610,27 +1610,27 @@
 
     }
 
-    if($_POST['domain_id'] != ''){
+    if(isset($_POST['domain_id']) && $_POST['domain_id'] != ''){
 
         $db->where('tb_p.pro_domain',$_POST['domain_id']  );
 
-        
+
 
     }
 
-    if($_POST['category_id'] != ''){
+    if(isset($_POST['category_id']) && $_POST['category_id'] != ''){
 
         $db->where('tb_p.category_id',$_POST['category_id']  );
 
-        
+
 
     }
 
-    if($_POST['brand_id'] != ''){
+    if(isset($_POST['brand_id']) && $_POST['brand_id'] != ''){
 
         $db->where('tb_p.company_name',$_POST['brand_id']  );
 
-        
+
 
     }
 
@@ -1755,7 +1755,7 @@
 
       $totalRecords++;
 
-      $total_expense+=$res['exp_amount'];
+      $total_expense += (float)$res['exp_amount'];
 
     }
 
@@ -2140,7 +2140,7 @@
       $total_receiveAble=0;
       $Balance=0;
 
-      if ( $_POST['date_from'] != '' && $_POST['date_to'] != ''  ) {
+      if ( isset($_POST['date_from']) && $_POST['date_from'] != '' && isset($_POST['date_to']) && $_POST['date_to'] != ''  ) {
 
         $date_from=$_POST['date_from'];
         $date_to=$_POST['date_to'];
@@ -2176,7 +2176,7 @@
 
       // Get Data for Show the Result In Table
 
-      if ( $_POST['date_from'] != '' && $_POST['date_to'] != ''  ) {
+      if ( isset($_POST['date_from']) && $_POST['date_from'] != '' && isset($_POST['date_to']) && $_POST['date_to'] != ''  ) {
 
         $date_from=$_POST['date_from'];
         $date_to=$_POST['date_to'];
@@ -2248,7 +2248,7 @@
       $total_receiveAble=0;
       $Balance=0;
 
-      if ( $_POST['date_from'] != '' && $_POST['date_to'] != ''  ) {
+      if ( isset($_POST['date_from']) && $_POST['date_from'] != '' && isset($_POST['date_to']) && $_POST['date_to'] != ''  ) {
 
         $date_from=$_POST['date_from'];
         $date_to=$_POST['date_to'];
@@ -2288,7 +2288,7 @@
 
       // Get Data for Show the Result In Table
 
-      if ( $_POST['date_from'] != '' && $_POST['date_to'] != ''  ) {
+      if ( isset($_POST['date_from']) && $_POST['date_from'] != '' && isset($_POST['date_to']) && $_POST['date_to'] != ''  ) {
 
         $date_from=$_POST['date_from'];
         $date_to=$_POST['date_to'];

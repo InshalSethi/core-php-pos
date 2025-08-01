@@ -115,13 +115,13 @@
             $ClientId = $transfers['client_id'];
             $db->where("cus_id",$ClientId);
             $CusData = $db->getOne("tbl_customer");
-            $ClientName = $CusData['cus_name'];
+            $ClientName = ($CusData && isset($CusData['cus_name'])) ? $CusData['cus_name'] : 'Unknown Client';
         } else if($transfers['supplier_id'] != ''){
 
             $ClientId = $transfers['supplier_id'];
             $db->where("cus_id",$ClientId);
             $CusData = $db->getOne("tbl_customer");
-            $ClientName = $CusData['cus_name'];
+            $ClientName = ($CusData && isset($CusData['cus_name'])) ? $CusData['cus_name'] : 'Unknown Supplier';
         } else{
             $ClientName = '';
         }
@@ -134,11 +134,16 @@
 
             $db->where("id",$transfers['exp_id']);
             $ExpData = $db->getOne("expenses");
-            $expTypeId = $ExpData['exp_type_id'];
 
-            $db->where("id",$expTypeId);
-            $ExpTypeData = $db->getOne("exp_type");
-            $expenseName = $ExpTypeData['type_name'];
+            if ($ExpData && isset($ExpData['exp_type_id'])) {
+                $expTypeId = $ExpData['exp_type_id'];
+
+                $db->where("id",$expTypeId);
+                $ExpTypeData = $db->getOne("exp_type");
+                $expenseName = ($ExpTypeData && isset($ExpTypeData['type_name'])) ? $ExpTypeData['type_name'] : 'Unknown Expense';
+            } else {
+                $expenseName = 'Unknown Expense';
+            }
 
         } else{
             $expenseName = '';
@@ -148,20 +153,20 @@
 
         if($transfers['category'] == 'sale invoice'){
             // $receipt = 'Income';
-            $Forreceipt = number_format($transfers['amount']);
-            $receipt = $transfers['amount'];
+            $Forreceipt = number_format((float)$transfers['amount']);
+            $receipt = (float)$transfers['amount'];
             $Balance += $receipt;
 
         } elseif ($transfers['category'] == 'receipt voucher') {
 
-            $Forreceipt = number_format($transfers['amount']);
-            $receipt = $transfers['amount'];
+            $Forreceipt = number_format((float)$transfers['amount']);
+            $receipt = (float)$transfers['amount'];
             $Balance += $receipt;
 
         } elseif ($transfers['category'] == 'Funds Transfer To') {
 
-            $Forreceipt = number_format($transfers['amount']);
-            $receipt = $transfers['amount'];
+            $Forreceipt = number_format((float)$transfers['amount']);
+            $receipt = (float)$transfers['amount'];
             $Balance += $receipt;
         } else{
             $Forreceipt = '';
@@ -169,33 +174,33 @@
 
         if($transfers['category'] == 'Expense'){
             // $payments = 'Expense';
-            $Forpayments = number_format($transfers['amount']);
-            $payments = $transfers['amount'];
+            $Forpayments = number_format((float)$transfers['amount']);
+            $payments = (float)$transfers['amount'];
             $Balance -= $payments;
 
         } elseif($transfers['category'] == 'purchase invoice'){
 
             // $payments = 'Expense';
-            $Forpayments = number_format($transfers['amount']);
-            $payments = $transfers['amount'];
+            $Forpayments = number_format((float)$transfers['amount']);
+            $payments = (float)$transfers['amount'];
             $Balance -= $payments;
         } elseif($transfers['category'] == 'payment voucher'){
 
             // $payments = 'Expense';
-            $Forpayments = number_format($transfers['amount']);
-            $payments = $transfers['amount'];
+            $Forpayments = number_format((float)$transfers['amount']);
+            $payments = (float)$transfers['amount'];
             $Balance -= $payments;
 
         } elseif ($transfers['category'] == 'Funds Transfer From') {
 
-            $Forpayments = number_format($transfers['amount']);
-            $payments = $transfers['amount'];
+            $Forpayments = number_format((float)$transfers['amount']);
+            $payments = (float)$transfers['amount'];
             $Balance -= $payments;
 
         } else{
             $Forpayments = '';
         }
-        $BalanceHtml = number_format($Balance);
+        $BalanceHtml = number_format((float)$Balance);
 
 ////////////////////////////////////////////////////////////////
 

@@ -1,5 +1,6 @@
-<?php 
-$main_site = 'https://clubroad.madinapaints.com/';
+<?php
+// Temporary simple version for debugging
+$main_site = 'http://localhost/madinapaints/';
 define ('WP_HOME',$main_site);
 
 
@@ -14,7 +15,8 @@ function base_url($ur){
 }
 
 function CheckPermission($data,$search){
-  
+  $is_found = 0; // Initialize variable to prevent undefined variable warning
+
   foreach($data as $da){
     if($da['name']==$search){
       $is_found=1;
@@ -34,27 +36,42 @@ function GetProductSupplierDetail($pro_id,$db){
     
     $data=array();
     
-    $invoiceData = $db->rawQueryOne("SELECT MIN(supplier_price) as price,pur_in_id FROM tbl_purchase_invoice_pro WHERE pro_id='".$pro_id."'");
-    $data['price']=$invoiceData['price'];
-    if($invoiceData['pur_in_id'] != ''){
-        
-        $db->where('pur_in_id',$invoiceData['pur_in_id']);
-        $supplierId=$db->getValue('tbl_purchase_invoice','supplier_id');
-        
-        
-        $db->where('cus_id',$supplierId);
-        $supData=$db->getOne('tbl_customer');
-        
-        
-        $data['sup_name']=$supData['cus_name'];
-        $data['contact']=$supData['cus_mobile'];
-        
+    $invoiceData = $db->rawQueryOne("SELECT supplier_price as price, pur_in_id FROM tbl_purchase_invoice_pro WHERE pro_id='".$pro_id."' ORDER BY supplier_price ASC LIMIT 1");
+
+    if(!empty($invoiceData) && isset($invoiceData['price'])){
+        $data['price']=$invoiceData['price'];
+
+        if(!empty($invoiceData['pur_in_id'])){
+
+            $db->where('pur_in_id',$invoiceData['pur_in_id']);
+            $supplierId=$db->getValue('tbl_purchase_invoice','supplier_id');
+
+            if(!empty($supplierId)){
+                $db->where('cus_id',$supplierId);
+                $supData=$db->getOne('tbl_customer');
+
+                if(!empty($supData)){
+                    $data['sup_name']=isset($supData['cus_name']) ? $supData['cus_name'] : '';
+                    $data['contact']=isset($supData['cus_mobile']) ? $supData['cus_mobile'] : '';
+                } else {
+                    $data['sup_name']='';
+                    $data['contact']='';
+                }
+            } else {
+                $data['sup_name']='';
+                $data['contact']='';
+            }
+
+        } else{
+            $data['sup_name']='';
+            $data['contact']='';
+        }
     } else{
-        
+
         $data['price']='';
         $data['sup_name']='';
         $data['contact']='';
-        
+
     }
     
     
@@ -80,7 +97,7 @@ function GetAccountBalance($account_id,$openingBalance,$db){
     foreach($transfersdata as $transfers){
           if($transfers['category'] == 'sale invoice'){
                 // $receipt = 'Income';
-                $receipt = $transfers['amount'];
+                $receipt = (float)$transfers['amount'];
                 $Balance += $receipt;
             }else{
                 $receipt = '';
@@ -88,14 +105,14 @@ function GetAccountBalance($account_id,$openingBalance,$db){
 
             if($transfers['category'] == 'receipt voucher'){
                 // $receipt = 'Income';
-                $receipt = $transfers['amount'];
+                $receipt = (float)$transfers['amount'];
                 $Balance += $receipt;
             }else{
                 $receipt = '';
             }
 
             if($transfers['category'] == 'payment voucher'){
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
                 $Balance -= $payments;
             }else{
                 $payments = '';
@@ -103,7 +120,7 @@ function GetAccountBalance($account_id,$openingBalance,$db){
 
             if($transfers['category'] == 'Expense'){
                 // $payments = 'Expense';
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
                 $Balance -= $payments;
             }else{
                 $payments = '';
@@ -111,15 +128,15 @@ function GetAccountBalance($account_id,$openingBalance,$db){
 
             if($transfers['category'] == 'purchase invoice'){
                 // $payments = 'Expense';
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
                 $Balance -= $payments;
             }else{
                 $payments = '';
             }
 
             if($transfers['category'] == 'Funds Transfer From'){
-              
-                $transferAmountFrom = $transfers['amount'];
+
+                $transferAmountFrom = (float)$transfers['amount'];
                 $Balance -= $transferAmountFrom;
             }else{
                 $transferAmountFrom = '';
@@ -127,13 +144,13 @@ function GetAccountBalance($account_id,$openingBalance,$db){
 
             if ($transfers['category'] == 'Funds Transfer To') {
 
-                $transferAmount = $transfers['amount'];
+                $transferAmount = (float)$transfers['amount'];
                 $Balance += $transferAmount;
             }else{
                 $transferAmount = '';
             }
-        }    
-    $CurrentBalance = $Balance + $openingBalance;
+        }
+    $CurrentBalance = $Balance + (float)$openingBalance;
     $TotalBalance += $CurrentBalance;
     
     return $CurrentBalance;
@@ -1321,28 +1338,28 @@ function GetTransactionBalance($start,$limit,$account_no,$columnSortOrder,$db){
         $accountID=$transfers['id'];
         $db->where('id',$transfers['id']);
         $OpeningBalance=$db->getValue('account','opening_balance');
-        $Balance = $Balance + $OpeningBalance;
+        $Balance = $Balance + (float)$OpeningBalance;
       }
 
 
       ///////////////////////Get Receipt And Payment Name////////////////////
       if($transfers['category'] == 'Income'){
-          $receipt = $transfers['amount'];
+          $receipt = (float)$transfers['amount'];
           $Balance += $receipt;
       }elseif ($transfers['category'] == 'Funds Transfer To') {
-          $receipt = $transfers['amount'];
+          $receipt = (float)$transfers['amount'];
           $Balance += $receipt;
       }else{
           $Forreceipt = '';
       }
 
-      
 
-      if($transfers['category'] == 'Expense'){     
-          $payments = $transfers['amount'];
+
+      if($transfers['category'] == 'Expense'){
+          $payments = (float)$transfers['amount'];
           $Balance -= $payments;
       }elseif ($transfers['category'] == 'Funds Transfer From') {
-          $payments = $transfers['amount'];
+          $payments = (float)$transfers['amount'];
           $Balance -= $payments;
       }else{
           $Forpayments = '';
@@ -1372,8 +1389,8 @@ function addCashInAccount($db,$AccountNumber,$Amount){
   $db->where('id',$AccountNumber);
   $acc_cp = $db->getOne("account");
   $AccCoaId = $acc_cp['coa_id'];
-  $acc_cp_bal = $acc_cp['balance'];
-  $account_new_balance_client = $acc_cp_bal + $Amount;
+  $acc_cp_bal = (float)$acc_cp['balance'];
+  $account_new_balance_client = $acc_cp_bal + (float)$Amount;
   
   $up_acc_client = array("balance"=>$account_new_balance_client);
   $db->where("id",$AccountNumber);
@@ -1386,9 +1403,9 @@ function deductBankAmount($db,$AccountNumber,$Amount){
   $db->where('id',$AccountNumber);
   $acc_dp = $db->getOne("account");
   $AccCoaId = $acc_dp['coa_id'];
-  $acc_dp_bal = $acc_dp['balance'];
+  $acc_dp_bal = (float)$acc_dp['balance'];
   $acc_dp_account_number = $acc_dp['account_number'];
-  $account_new_balance = $acc_dp_bal - $Amount;
+  $account_new_balance = $acc_dp_bal - (float)$Amount;
   
   $up_acc_dept = array("balance"=>$account_new_balance);
   $db->where("id",$AccountNumber);
@@ -1401,11 +1418,11 @@ function AddandDeductAmount($db,$AccountNumber,$OldAmount,$NewAmount){
   $db->where('id',$AccountNumber);
   $acc_det=$db->getOne('account');
   $AccCoaId = $acc_det['coa_id'];
-  $AccBal = $acc_det['balance'];
+  $AccBal = (float)$acc_det['balance'];
   $acc_dp_account_number = $acc_det['account_number'];
-  
-  $new_bal=$AccBal + $OldAmount;
-  $after_bal=$new_bal - $NewAmount;
+
+  $new_bal=$AccBal + (float)$OldAmount;
+  $after_bal=$new_bal - (float)$NewAmount;
   
   //update the new balance
   $up_acc=array("balance"=>$after_bal);
@@ -1417,11 +1434,11 @@ function AddandDeductAmount($db,$AccountNumber,$OldAmount,$NewAmount){
 function DeductandAddAmount($db,$AccountNumber,$OldAmount,$NewAmount){
   $db->where('id',$AccountNumber);
   $acc_da_cl=$db->getOne('account');
-  $AccBalCli = $acc_da_cl['balance'];
+  $AccBalCli = (float)$acc_da_cl['balance'];
   $AccCoaIdCli = $acc_da_cl['coa_id'];
-  
-  $new_balnce_old= $AccBalCli - $OldAmount;
-  $new_balnce = $new_balnce_old + $NewAmount;
+
+  $new_balnce_old= $AccBalCli - (float)$OldAmount;
+  $new_balnce = $new_balnce_old + (float)$NewAmount;
   
   $cli_arr=array("balance"=>$new_balnce);
   $db->where('id',$AccountNumber);
@@ -1521,8 +1538,8 @@ function addSaleInvoiceGl($db,$InvoiceId,$Price,$Received,$Balance,$PaymentDate,
 
 ///////////////////////////////////////////////////////////////////
 function sanitize_text_input($str){
-    $str=strip_tags($str); 
-   $newstr = filter_var($str, FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
+    $str=strip_tags($str);
+   $newstr = filter_var($str, FILTER_SANITIZE_FULL_SPECIAL_CHARS,FILTER_FLAG_STRIP_HIGH);
     return $newstr;
 
 

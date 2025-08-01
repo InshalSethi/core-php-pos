@@ -10,16 +10,16 @@
     $decode_emp = decode($x);
     $db->where("employee_id",$decode_emp);
     $employeeData = $db->getOne("employee");
-    $Em_name = $employeeData['name'];
-    $Em_sr_name = $employeeData['sr_name'];
-    $Em_gender = $employeeData['gender'];
-    $Em_email = $employeeData['email'];
-    $Em_phon_no = $employeeData['phon_no'];
-    $Em_salary = $employeeData['salary'];
-    $Em_address = $employeeData['address'];
-    $Em_cnic = $employeeData['cnic'];
-    $Em_dob = $employeeData['dob'];
-    $Em_qualification = $employeeData['qualification'];
+    $Em_name = ($employeeData && isset($employeeData['name'])) ? $employeeData['name'] : 'Unknown Employee';
+    $Em_sr_name = ($employeeData && isset($employeeData['sr_name'])) ? $employeeData['sr_name'] : 'N/A';
+    $Em_gender = ($employeeData && isset($employeeData['gender'])) ? $employeeData['gender'] : 'N/A';
+    $Em_email = ($employeeData && isset($employeeData['email'])) ? $employeeData['email'] : 'N/A';
+    $Em_phon_no = ($employeeData && isset($employeeData['phon_no'])) ? $employeeData['phon_no'] : 'N/A';
+    $Em_salary = ($employeeData && isset($employeeData['salary'])) ? $employeeData['salary'] : '0';
+    $Em_address = ($employeeData && isset($employeeData['address'])) ? $employeeData['address'] : 'N/A';
+    $Em_cnic = ($employeeData && isset($employeeData['cnic'])) ? $employeeData['cnic'] : 'N/A';
+    $Em_dob = ($employeeData && isset($employeeData['dob'])) ? $employeeData['dob'] : 'N/A';
+    $Em_qualification = ($employeeData && isset($employeeData['qualification'])) ? $employeeData['qualification'] : 'N/A';
   }
 ?>
 <!DOCTYPE html>
@@ -279,7 +279,7 @@
                                             Salary
                                           </span><br>
                                           <span class="text-muted fnt-c">
-                                            <?php if($Em_salary != ''){ echo number_format($Em_salary); } ?>
+                                            <?php if($Em_salary != ''){ echo number_format((float)$Em_salary); } ?>
                                           </span>
                                         </p>
                                         <p class="clearfix brd-btm pd-st">
@@ -330,10 +330,10 @@
 
   $db->where("id",$SalId);
   $SalaryData = $db->getOne("employee_salary");
-  $EmplId = $SalaryData['employee_id'];
+  $EmplId = ($SalaryData && isset($SalaryData['employee_id'])) ? $SalaryData['employee_id'] : null;
 
-    if ($decode_emp == $EmplId) {
-      $exp_amount = $expenses['amount']; 
+    if ($decode_emp == $EmplId && $EmplId !== null) {
+      $exp_amount = (float)$expenses['amount'];
       $TotalExpense +=$exp_amount;
     }
    
@@ -352,7 +352,7 @@
                                             <div class="card-body set-card-body">
                                             <h4 class="card-title sm-bx-fn">Total Expense</h4>
                                             <div class="d-flex justify-content-between">
-                                              <p class="text-dark sm-am-fn">Rs <?php echo number_format($TotalExpense); ?> </p>
+                                              <p class="text-dark sm-am-fn">Rs <?php echo number_format((float)$TotalExpense); ?> </p>
                                             </div>
                                           </div>
                                         </div>
@@ -389,9 +389,9 @@
 
   $db->where("id",$SalId);
   $SalaryData = $db->getOne("employee_salary");
-  $EmplId = $SalaryData['employee_id'];
+  $EmplId = ($SalaryData && isset($SalaryData['employee_id'])) ? $SalaryData['employee_id'] : null;
 
-  if ($decode_emp == $EmplId) {
+  if ($decode_emp == $EmplId && $EmplId !== null) {
     $expense_id = $expenses['id'];
     $encrypt = encode($expense_id);
     $exp_voucher = $expenses['voucher'];
@@ -405,15 +405,15 @@
     $exp_category = $expenses['category'];
     $db->where("id",$exp_type_id);
     $exp_typedata = $db->getOne("exp_type");
-    $exp_type_name = $exp_typedata['type_name'];
+    $exp_type_name = ($exp_typedata && isset($exp_typedata['type_name'])) ? $exp_typedata['type_name'] : 'Unknown Type';
 
     $db->where("id",$exp_acc_id);
     $AccData = $db->getOne("account");
-    $AccNumber = $AccData['account_number'];
+    $AccNumber = ($AccData && isset($AccData['account_number'])) ? $AccData['account_number'] : 'Unknown Account';
 
     $db->where("employee_id",$EmplId);
     $EmplData = $db->getOne("employee");
-    $EmplName = $EmplData['name'];
+    $EmplName = ($EmplData && isset($EmplData['name'])) ? $EmplData['name'] : 'Unknown Employee';
   
 
 ?>

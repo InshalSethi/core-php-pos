@@ -438,7 +438,7 @@
 
                                                           // $receipt = 'Income';
 
-                                                          $receipt = $transfers['amount'];
+                                                          $receipt = (float)$transfers['amount'];
 
                                                           $Balance += $receipt;
 
@@ -454,7 +454,7 @@
 
                                                           // $receipt = 'Income';
 
-                                                          $receipt = $transfers['amount'];
+                                                          $receipt = (float)$transfers['amount'];
 
                                                           $Balance += $receipt;
 
@@ -468,7 +468,7 @@
 
                                                       if($transfers['category'] == 'payment voucher'){
 
-                                                          $payments = $transfers['amount'];
+                                                          $payments = (float)$transfers['amount'];
 
                                                           $Balance -= $payments;
 
@@ -484,7 +484,7 @@
 
                                                           // $payments = 'Expense';
 
-                                                          $payments = $transfers['amount'];
+                                                          $payments = (float)$transfers['amount'];
 
                                                           $Balance -= $payments;
 
@@ -500,7 +500,7 @@
 
                                                           // $payments = 'Expense';
 
-                                                          $payments = $transfers['amount'];
+                                                          $payments = (float)$transfers['amount'];
 
                                                           $Balance -= $payments;
 
@@ -516,7 +516,7 @@
 
                                                         
 
-                                                          $transferAmountFrom = $transfers['amount'];
+                                                          $transferAmountFrom = (float)$transfers['amount'];
 
                                                           $Balance -= $transferAmountFrom;
 
@@ -532,7 +532,7 @@
 
 
 
-                                                          $transferAmount = $transfers['amount'];
+                                                          $transferAmount = (float)$transfers['amount'];
 
                                                           $Balance += $transferAmount;
 
@@ -680,6 +680,11 @@
 
     $acc=$db->getOne('account');
 
+    // If no default account exists, get the first available account
+    if (!$acc) {
+        $acc = $db->getOne('account');
+    }
+
       
 
      ?>
@@ -694,7 +699,7 @@
 
 
 
-      var acc_no='<?php echo $acc['id']; ?>';
+      var acc_no='<?php echo isset($acc['id']) ? $acc['id'] : ''; ?>';
 
       
 
@@ -759,7 +764,7 @@
             if(paid_from != ''){
               var acc_no=paid_from;
             } else{
-              var acc_no='<?php echo $acc['id']; ?>';
+              var acc_no='<?php echo isset($acc['id']) ? $acc['id'] : ''; ?>';
             }
             
             var date_from=$("#date_from_adsr").val();

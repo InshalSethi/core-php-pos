@@ -18,13 +18,24 @@
     $db->where('id',$cash_id);
     $data=$db->getOne('client_payments'); 
 
-    $db->where('cus_id',$data['client_id']);
-    $cus=$db->getOne('tbl_customer');
+    // Get customer data if client_id exists
+    if ($data && isset($data['client_id'])) {
+        $db->where('cus_id',$data['client_id']);
+        $cus=$db->getOne('tbl_customer');
+    } else {
+        $cus = null;
+    }
 
-    
+    // Get company data for header
+    $companydata = $db->getOne('company');
+    $company_name = ($companydata && isset($companydata['name'])) ? $companydata['name'] : 'Company Name';
+
+    // Set default values for customer data if not found
+    $cus_name = ($cus && isset($cus['cus_name'])) ? $cus['cus_name'] : 'Unknown Customer';
+    $cus_phone = ($cus && isset($cus['cus_phone'])) ? $cus['cus_phone'] : 'N/A';
+    $cus_city = ($cus && isset($cus['cus_city'])) ? $cus['cus_city'] : 'N/A';
 
 
-    
 
 
 
@@ -237,7 +248,7 @@
 
                               <td class="set-padd text-center tbl-head bold">تاریخ</td>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $cus['cus_name']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo $cus_name; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">پارٹی کا نام</td>
 
@@ -249,7 +260,7 @@
 
                               <td class="set-padd text-center tbl-head bold">بل نمبر</td>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $cus['cus_phone']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo $cus_phone; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">فون نمبر</td>
 
@@ -261,7 +272,7 @@
 
                               <td class="set-padd text-center tbl-head bold"></td>
 
-                              <td class="set-padd text-center tbl-con"><?php echo $cus['cus_city']; ?></td>
+                              <td class="set-padd text-center tbl-con"><?php echo $cus_city; ?></td>
 
                               <td class="set-padd text-center tbl-head bold">ایڈریس</td>
 
@@ -318,7 +329,7 @@
                               </td>
 
                               <td class="set-padd text-center tbl-con in-no">
-                                <?php echo $cus['cus_name']; ?>
+                                <?php echo $cus_name; ?>
                               </td>
 
                               <td class="set-padd text-center tbl-con"><?php echo $cash_id; ?></td>
@@ -355,12 +366,8 @@
 
                       </div>
 
-                      <?php 
-
-                          $companydata = $db->getOne('company');
-
-                          $company_name = $companydata['name']; 
-
+                      <?php
+                          // Company data already loaded at the top of the file
                        ?>
 
                       

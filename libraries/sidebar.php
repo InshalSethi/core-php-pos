@@ -1190,9 +1190,9 @@
 
                 <div class="text-wrapper">
 
-                  <p class="profile-name"><?php $type = $_SESSION['user_type'];
+                  <p class="profile-name"><?php $type = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
 
-                    $id = $_SESSION['login_id'];
+                    $id = isset($_SESSION['login_id']) ? $_SESSION['login_id'] : 0;
 
                     $db->where("id",$id);
 
@@ -1210,7 +1210,7 @@
 
             
 
-            <?php if ($_SESSION['login_id']) { ?>
+            <?php if (isset($_SESSION['login_id']) && $_SESSION['login_id']) { ?>
 
 
             <?php 

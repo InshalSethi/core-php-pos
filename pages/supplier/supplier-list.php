@@ -55,27 +55,27 @@
 
 
 
-    foreach($data as $da){ 
+    foreach($data as $da){
 
     if($da['status'] == 'PURCHASE'){
 
 
 
-      $total_receiveAble+=$da['total_amount'];
+      $total_receiveAble+=(float)$da['total_amount'];
 
-      $total_received+=$da['received_amount'];
+      $total_received+=(float)$da['received_amount'];
 
-    } 
+    }
 
     if ($da['status'] == 'CASH_PAYMENT') {
 
-      $total_received+=$da['received_amount'];
+      $total_received+=(float)$da['received_amount'];
 
     }
 
     if($da['status'] == 'PURCHASE_RETURN'){
 
-      $total_received+=$da['received_amount'];
+      $total_received+=(float)$da['received_amount'];
 
     }
 
@@ -270,7 +270,7 @@
 
                              echo $balnceCustomer;
 
-                            $totalBalance=$balnceCustomer +$totalBalance;
+                            $totalBalance=(float)$balnceCustomer + (float)$totalBalance;
 
                              ?></td>
 

@@ -431,7 +431,7 @@
 
                 // $receipt = 'Income';
 
-                $receipt = $transfers['amount'];
+                $receipt = (float)$transfers['amount'];
 
                 $Balance += $receipt;
 
@@ -447,7 +447,7 @@
 
                 // $receipt = 'Income';
 
-                $receipt = $transfers['amount'];
+                $receipt = (float)$transfers['amount'];
 
                 $Balance += $receipt;
 
@@ -461,7 +461,7 @@
 
             if($transfers['category'] == 'payment voucher'){
 
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
 
                 $Balance -= $payments;
 
@@ -477,7 +477,7 @@
 
                 // $payments = 'Expense';
 
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
 
                 $Balance -= $payments;
 
@@ -493,7 +493,7 @@
 
                 // $payments = 'Expense';
 
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
 
                 $Balance -= $payments;
 
@@ -507,9 +507,9 @@
 
             if($transfers['category'] == 'Funds Transfer From'){
 
-              
 
-                $transferAmountFrom = $transfers['amount'];
+
+                $transferAmountFrom = (float)$transfers['amount'];
 
                 $Balance -= $transferAmountFrom;
 
@@ -525,7 +525,7 @@
 
 
 
-                $transferAmount = $transfers['amount'];
+                $transferAmount = (float)$transfers['amount'];
 
                 $Balance += $transferAmount;
 
@@ -535,7 +535,7 @@
 
             }
 
-        }    $CurrentBalance = $Balance + $Opening_balance;
+        }    $CurrentBalance = $Balance + (float)$Opening_balance;
 
     $TotalBalance += $CurrentBalance;
 

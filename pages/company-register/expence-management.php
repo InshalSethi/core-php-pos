@@ -240,7 +240,7 @@
           $Total_exp_amount = 0;
           $expensesValData = $db->get("expenses");
             foreach ($expensesValData as $expensesVal) {
-            $Total_exp_amount += $expensesVal['amount'];
+            $Total_exp_amount += (float)$expensesVal['amount'];
           }
           ?>
 
@@ -315,21 +315,21 @@
 
                                                     if($transfers['category'] == 'sale invoice'){
                                                           // $receipt = 'Income';
-                                                          $receipt = $transfers['amount'];
+                                                          $receipt = (float)$transfers['amount'];
                                                           $Balance += $receipt;
                                                       }else{
                                                           $receipt = '';
                                                       }
                                                       if($transfers['category'] == 'receipt voucher'){
                                                           // $receipt = 'Income';
-                                                          $receipt = $transfers['amount'];
+                                                          $receipt = (float)$transfers['amount'];
                                                           $Balance += $receipt;
                                                       }else{
                                                           $receipt = '';
                                                       }
 
                                                       if($transfers['category'] == 'payment voucher'){
-                                                          $payments = $transfers['amount'];
+                                                          $payments = (float)$transfers['amount'];
                                                           $Balance -= $payments;
                                                       }else{
                                                           $payments = '';
@@ -337,7 +337,7 @@
 
                                                       if($transfers['category'] == 'Expense'){
                                                           // $payments = 'Expense';
-                                                          $payments = $transfers['amount'];
+                                                          $payments = (float)$transfers['amount'];
                                                           $Balance -= $payments;
                                                       }else{
                                                           $payments = '';
@@ -345,15 +345,15 @@
 
                                                       if($transfers['category'] == 'purchase invoice'){
                                                           // $payments = 'Expense';
-                                                          $payments = $transfers['amount'];
+                                                          $payments = (float)$transfers['amount'];
                                                           $Balance -= $payments;
                                                       }else{
                                                           $payments = '';
                                                       }
 
                                                       if($transfers['category'] == 'Funds Transfer From'){
-                                                        
-                                                          $transferAmountFrom = $transfers['amount'];
+
+                                                          $transferAmountFrom = (float)$transfers['amount'];
                                                           $Balance -= $transferAmountFrom;
                                                       }else{
                                                           $transferAmountFrom = '';
@@ -361,18 +361,18 @@
 
                                                       if ($transfers['category'] == 'Funds Transfer To') {
 
-                                                          $transferAmount = $transfers['amount'];
+                                                          $transferAmount = (float)$transfers['amount'];
                                                           $Balance += $transferAmount;
                                                       }else{
                                                           $transferAmount = '';
                                                       }
 
-                                                      
 
-                                                      
+
+
 
                                                   }
-                                                  $CurrentBalance = $Balance + $Opening_balance;
+                                                  $CurrentBalance = $Balance + (float)$Opening_balance;
                                                   
                                                  ?>
                                                  <option value="<?php echo $account_id; ?>"><?php echo $acc_account_name.' - '.$acc_bank.' - '.$acc_account_number.'  ('.number_format($CurrentBalance).') '; ?></option>
@@ -501,21 +501,25 @@
                                     $exp_category = $expenses['category'];
                                     $db->where("id",$exp_type_id);
                                     $exp_typedata = $db->getOne("exp_type");
-                                    $exp_type_name = $exp_typedata['type_name'];
-                                    
+                                    $exp_type_name = ($exp_typedata && isset($exp_typedata['type_name'])) ? $exp_typedata['type_name'] : 'Unknown Type';
+
 
                                     $db->where("id",$exp_acc_id);
                                     $AccData = $db->getOne("account");
-                                    $AccNumber = $AccData['account_number'];
+                                    $AccNumber = ($AccData && isset($AccData['account_number'])) ? $AccData['account_number'] : '';
 
                                     $db->where("id",$SalId);
                                     $SalaryData = $db->getOne("employee_salary");
-                                    $EmplId = $SalaryData['employee_id'];
-                                    $EmplEncode = encode($EmplId);
+                                    $EmplId = ($SalaryData && isset($SalaryData['employee_id'])) ? $SalaryData['employee_id'] : null;
+                                    $EmplEncode = $EmplId ? encode($EmplId) : '';
 
-                                    $db->where("employee_id",$EmplId);
-                                    $EmplData = $db->getOne("employee");
-                                    $EmplName = $EmplData['name'];
+                                    if ($EmplId) {
+                                        $db->where("employee_id",$EmplId);
+                                        $EmplData = $db->getOne("employee");
+                                        $EmplName = ($EmplData && isset($EmplData['name'])) ? $EmplData['name'] : 'Unknown Employee';
+                                    } else {
+                                        $EmplName = '';
+                                    }
                                     
                                     
                                     

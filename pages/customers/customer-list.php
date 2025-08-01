@@ -60,21 +60,21 @@
 
 
 
-        $total_receiveAble+=$da['total_amount'];
+        $total_receiveAble += (float)($da['total_amount'] ?? 0);
 
-        $total_received+=$da['received_amount'];
+        $total_received += (float)($da['received_amount'] ?? 0);
 
       } 
 
       if ($da['status'] == 'CASH_RECEIVED') {
 
-        $total_received+=$da['received_amount'];
+        $total_received += (float)($da['received_amount'] ?? 0);
 
       }
 
       if($da['status'] == 'SALE_RETURN'){
 
-        $total_received+=$da['received_amount'];
+        $total_received += (float)($da['received_amount'] ?? 0);
 
       }
 

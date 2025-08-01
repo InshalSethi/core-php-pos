@@ -1,8 +1,8 @@
 <?php 
 class database{
 	private $host="localhost";
-	private $username="root";
-	private $password='';
+	private $username="sairauma_madina_clubroad_root";
+	private $password='yKk8JndNATab';
 	private $database="sairauma_sairauma_madina_clubroad";
 	protected $conn;
 	    

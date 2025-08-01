@@ -9,8 +9,8 @@
     $decode_type = decode($x);
     $db->where("id",$decode_type);
     $ExpTypeData = $db->getOne("exp_type");
-    $typ_name = $ExpTypeData['type_name'];
-    $typ_chrtId = $ExpTypeData['chrt_id'];
+    $typ_name = ($ExpTypeData && isset($ExpTypeData['type_name'])) ? $ExpTypeData['type_name'] : 'Unknown Type';
+    $typ_chrtId = ($ExpTypeData && isset($ExpTypeData['chrt_id'])) ? $ExpTypeData['chrt_id'] : null;
   }
 
 ?>
@@ -231,9 +231,9 @@
   $expensesdata = $db->get("expenses");
   $TotalExpense = 0;
   foreach ($expensesdata as $expenses) {
-  $exp_amount = $expenses['amount']; 
-  $TotalExpense +=$exp_amount; 
-  } 
+  $exp_amount = (float)$expenses['amount'];
+  $TotalExpense +=$exp_amount;
+  }
   
 ?>
                                 <div class="col-12 col-sm-6 col-md-6 col-xl-4 grid-margin stretch-card">
@@ -248,7 +248,7 @@
                                             <div class="card-body set-card-body">
                                             <h4 class="card-title sm-bx-fn">Total Expense</h4>
                                             <div class="d-flex justify-content-between">
-                                              <p class="text-dark sm-am-fn">Rs <?php echo number_format($TotalExpense); ?> </p>
+                                              <p class="text-dark sm-am-fn">Rs <?php echo number_format((float)$TotalExpense); ?> </p>
                                             </div>
                                           </div>
                                         </div>
@@ -296,20 +296,24 @@
   $exp_category = $expenses['category'];
   $db->where("id",$exp_type_id);
   $exp_typedata = $db->getOne("exp_type");
-  $exp_type_name = $exp_typedata['type_name'];
+  $exp_type_name = ($exp_typedata && isset($exp_typedata['type_name'])) ? $exp_typedata['type_name'] : 'Unknown Type';
 
 
   $db->where("id",$exp_acc_id);
   $AccData = $db->getOne("account");
-  $AccNumber = $AccData['account_number'];
+  $AccNumber = ($AccData && isset($AccData['account_number'])) ? $AccData['account_number'] : 'Unknown Account';
 
   $db->where("id",$SalId);
   $SalaryData = $db->getOne("employee_salary");
-  $EmplId = $SalaryData['employee_id'];
+  $EmplId = ($SalaryData && isset($SalaryData['employee_id'])) ? $SalaryData['employee_id'] : null;
 
-  $db->where("employee_id",$EmplId);
-  $EmplData = $db->getOne("employee");
-  $EmplName = $EmplData['name'];
+  if ($EmplId) {
+    $db->where("employee_id",$EmplId);
+    $EmplData = $db->getOne("employee");
+    $EmplName = ($EmplData && isset($EmplData['name'])) ? $EmplData['name'] : 'Unknown Employee';
+  } else {
+    $EmplName = 'Unknown Employee';
+  }
   
   
   

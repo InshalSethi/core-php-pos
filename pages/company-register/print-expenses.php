@@ -53,7 +53,7 @@
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <div class="noprint">
-        <?php include '../../libraries/nav.php'; ?>
+        <?php //include '../../libraries/nav.php'; ?>
       </div>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
@@ -62,7 +62,7 @@
         <!-- partial -->
         <!-- partial:partials/_sidebar.html -->
       <div class="noprint">
-        <?php include '../../libraries/sidebar.php'; ?>
+        <?php //include '../../libraries/sidebar.php'; ?>
       </div>
         <!-- partial -->
         <div class="main-panel">
@@ -210,19 +210,23 @@
                 $exp_category = $expenses['category'];
                 $db->where("id",$exp_type_id);
                 $exp_typedata = $db->getOne("exp_type");
-                $exp_type_name = $exp_typedata['type_name'];
+                $exp_type_name = ($exp_typedata && isset($exp_typedata['type_name'])) ? $exp_typedata['type_name'] : 'Unknown Type';
 
-                $db->where("customer_id",$client_id);
-                $customers = $db->getOne("customers");
-                $customer_name = $customers['customer_name'];
+                $db->where("cus_id",$client_id);
+                $customers = $db->getOne("tbl_customer");
+                $customer_name = ($customers && isset($customers['cus_name'])) ? $customers['cus_name'] : 'Unknown Customer';
 
                 $db->where("id",$SalId);
                 $SalaryData = $db->getOne("employee_salary");
-                $EmplId = $SalaryData['employee_id'];
+                $EmplId = ($SalaryData && isset($SalaryData['employee_id'])) ? $SalaryData['employee_id'] : null;
 
-                $db->where("employee_id",$EmplId);
-                $EmplData = $db->getOne("employee");
-                $EmplName = $EmplData['name'];
+                if ($EmplId) {
+                    $db->where("employee_id",$EmplId);
+                    $EmplData = $db->getOne("employee");
+                    $EmplName = ($EmplData && isset($EmplData['name'])) ? $EmplData['name'] : 'Unknown Employee';
+                } else {
+                    $EmplName = 'Unknown Employee';
+                }
 ?>
                             <tr>
                               <td class="set-padd text-center tbl-con voucher-no"><?php  echo $exp_voucher;?></td>

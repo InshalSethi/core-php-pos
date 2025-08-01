@@ -32,17 +32,17 @@ function CheckBalanceSuppplier($cus_id,$db){
     //echo "----".$db->getLastQuery();
     //var_dump($data);
 
-    foreach($data as $da){ 
+    foreach($data as $da){
     if($da['status'] == 'PURCHASE'){
 
-      $total_receiveAble+=$da['total_amount'];
-      $total_received+=$da['received_amount'];
-    } 
+      $total_receiveAble += (float)$da['total_amount'];
+      $total_received += (float)$da['received_amount'];
+    }
     if ($da['status'] == 'CASH_PAYMENT') {
-      $total_received+=$da['received_amount'];
+      $total_received += (float)$da['received_amount'];
     }
     if($da['status'] == 'PURCHASE_RETURN'){
-      $total_received+=$da['received_amount'];
+      $total_received += (float)$da['received_amount'];
     }
 
   }
@@ -239,7 +239,7 @@ function CheckBalanceSuppplier($cus_id,$db){
         foreach($transfersdata as $transfers){
           if($transfers['category'] == 'sale invoice'){
                 // $receipt = 'Income';
-                $receipt = $transfers['amount'];
+                $receipt = (float)$transfers['amount'];
                 $Balance += $receipt;
             }else{
                 $receipt = '';
@@ -247,14 +247,14 @@ function CheckBalanceSuppplier($cus_id,$db){
 
             if($transfers['category'] == 'receipt voucher'){
                 // $receipt = 'Income';
-                $receipt = $transfers['amount'];
+                $receipt = (float)$transfers['amount'];
                 $Balance += $receipt;
             }else{
                 $receipt = '';
             }
 
             if($transfers['category'] == 'payment voucher'){
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
                 $Balance -= $payments;
             }else{
                 $payments = '';
@@ -262,7 +262,7 @@ function CheckBalanceSuppplier($cus_id,$db){
 
             if($transfers['category'] == 'Expense'){
                 // $payments = 'Expense';
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
                 $Balance -= $payments;
             }else{
                 $payments = '';
@@ -270,15 +270,15 @@ function CheckBalanceSuppplier($cus_id,$db){
 
             if($transfers['category'] == 'purchase invoice'){
                 // $payments = 'Expense';
-                $payments = $transfers['amount'];
+                $payments = (float)$transfers['amount'];
                 $Balance -= $payments;
             }else{
                 $payments = '';
             }
 
             if($transfers['category'] == 'Funds Transfer From'){
-              
-                $transferAmountFrom = $transfers['amount'];
+
+                $transferAmountFrom = (float)$transfers['amount'];
                 $Balance -= $transferAmountFrom;
             }else{
                 $transferAmountFrom = '';
@@ -286,13 +286,13 @@ function CheckBalanceSuppplier($cus_id,$db){
 
             if ($transfers['category'] == 'Funds Transfer To') {
 
-                $transferAmount = $transfers['amount'];
+                $transferAmount = (float)$transfers['amount'];
                 $Balance += $transferAmount;
             }else{
                 $transferAmount = '';
             }
         }
-        $CurrentBalance = $Balance + $Opening_balance;
+        $CurrentBalance = $Balance + (float)$Opening_balance;
         $string='<option value="'.$account_id.'">'.$acc_account_name.' - '.$acc_bank.' - '.$acc_account_number.' ( '.$CurrentBalance.' )</option>';
         $dropDown.=$string;
         } 

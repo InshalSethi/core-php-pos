@@ -701,7 +701,7 @@ if(isset($_POST['exp_type_ar'])){
                                             <div class="input-group-prepend">
                                               <span class="input-group-text in-grp"><i class="mdi mdi-account-card-details"></i></span>
                                             </div>
-                                            <input type="text" name="voucher_no" class="form-control" value="<?php echo $voucher_view ; ?>" required id="voucher_nofield" placeholder="Enter Voucher No." readonly value="<?php echo $newvoucher; ?>"/>
+                                            <input type="text" name="voucher_no" class="form-control" value="<?php echo $voucher_view ; ?>" required id="voucher_nofield" placeholder="Enter Voucher No." readonly/>
                                           </div>
                                         </div>
                                       </div>
@@ -743,21 +743,21 @@ if(isset($_POST['exp_type_ar'])){
 
                           if($transfers['category'] == 'sale invoice'){
                               // $receipt = 'Income';
-                              $receipt = $transfers['amount'];
+                              $receipt = (float)$transfers['amount'];
                               $Balance += $receipt;
                           }else{
                               $receipt = '';
                           }
                           if($transfers['category'] == 'receipt voucher'){
                               // $receipt = 'Income';
-                              $receipt = $transfers['amount'];
+                              $receipt = (float)$transfers['amount'];
                               $Balance += $receipt;
                           }else{
                               $receipt = '';
                           }
 
                           if($transfers['category'] == 'payment voucher'){
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
@@ -765,7 +765,7 @@ if(isset($_POST['exp_type_ar'])){
 
                           if($transfers['category'] == 'Expense'){
                               // $payments = 'Expense';
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
@@ -773,15 +773,15 @@ if(isset($_POST['exp_type_ar'])){
 
                           if($transfers['category'] == 'purchase invoice'){
                               // $payments = 'Expense';
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
                           }
 
                           if($transfers['category'] == 'Funds Transfer From'){
-                            
-                              $transferAmountFrom = $transfers['amount'];
+
+                              $transferAmountFrom = (float)$transfers['amount'];
                               $Balance -= $transferAmountFrom;
                           }else{
                               $transferAmountFrom = '';
@@ -789,18 +789,18 @@ if(isset($_POST['exp_type_ar'])){
 
                           if ($transfers['category'] == 'Funds Transfer To') {
 
-                              $transferAmount = $transfers['amount'];
+                              $transferAmount = (float)$transfers['amount'];
                               $Balance += $transferAmount;
                           }else{
                               $transferAmount = '';
                           }
 
-                            
 
-                            
+
+
 
                         }
-                        $CurrentBalance = $Balance + $Opening_balance;
+                        $CurrentBalance = $Balance + (float)$Opening_balance;
                                                   ?>
                                                   <option value="<?php echo $acc_id; ?>" <?php if($acc_id == $account_id_view){echo "selected";} ?>><?php echo $acc_account_name.' - '.$acc_bank.' - '.$acc_account_number.'  ('.number_format($CurrentBalance).') '; ?></option>
                                                   <?php } ?>
@@ -938,7 +938,7 @@ if(isset($_POST['exp_type_ar'])){
                                               <span class="input-group-text in-grp"><i class="mdi mdi-account-card-details"></i></span>
                                             </div>
                                             <input type="hidden" name="expense_id" value="<?php echo $ex_id; ?>" class="form-control expense_idfield" required id="expense_idfield" readonly/>
-                                            <input type="text" name="voucher_no" value="<?php echo $voucher_edit; ?>" class="form-control voucher_nofield" required id="voucher_nofield" placeholder="Enter Voucher No." readonly value="<?php echo $newvoucher; ?>"/>
+                                            <input type="text" name="voucher_no" value="<?php echo $voucher_edit; ?>" class="form-control voucher_nofield" required id="voucher_nofield" placeholder="Enter Voucher No." readonly/>
                                           </div>
                                         </div>
                                       </div>
@@ -982,21 +982,21 @@ if(isset($_POST['exp_type_ar'])){
 
                           if($transfers['category'] == 'sale invoice'){
                               // $receipt = 'Income';
-                              $receipt = $transfers['amount'];
+                              $receipt = (float)$transfers['amount'];
                               $Balance += $receipt;
                           }else{
                               $receipt = '';
                           }
                           if($transfers['category'] == 'receipt voucher'){
                               // $receipt = 'Income';
-                              $receipt = $transfers['amount'];
+                              $receipt = (float)$transfers['amount'];
                               $Balance += $receipt;
                           }else{
                               $receipt = '';
                           }
 
                           if($transfers['category'] == 'payment voucher'){
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
@@ -1004,7 +1004,7 @@ if(isset($_POST['exp_type_ar'])){
 
                           if($transfers['category'] == 'Expense'){
                               // $payments = 'Expense';
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
@@ -1012,15 +1012,15 @@ if(isset($_POST['exp_type_ar'])){
 
                           if($transfers['category'] == 'purchase invoice'){
                               // $payments = 'Expense';
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
                           }
 
                           if($transfers['category'] == 'Funds Transfer From'){
-                            
-                              $transferAmountFrom = $transfers['amount'];
+
+                              $transferAmountFrom = (float)$transfers['amount'];
                               $Balance -= $transferAmountFrom;
                           }else{
                               $transferAmountFrom = '';
@@ -1028,18 +1028,18 @@ if(isset($_POST['exp_type_ar'])){
 
                           if ($transfers['category'] == 'Funds Transfer To') {
 
-                              $transferAmount = $transfers['amount'];
+                              $transferAmount = (float)$transfers['amount'];
                               $Balance += $transferAmount;
                           }else{
                               $transferAmount = '';
                           }
 
-                            
 
-                            
+
+
 
                         }
-                        $CurrentBalance = $Balance + $Opening_balance;
+                        $CurrentBalance = $Balance + (float)$Opening_balance;
                                                   ?>
                                                   <option value="<?php echo $acc_id; ?>" <?php if($acc_id == $account_id_edit){echo "selected";} ?>><?php echo $acc_account_name.' - '.$acc_bank.' - '.$acc_account_number.'  ('.number_format($CurrentBalance).') '; ?></option>
                                                   <?php } ?>
@@ -1188,26 +1188,26 @@ if(isset($_POST['expense_edit_data'])){
     	
     	if($account_id_old == $acc_id){
 	    	//Update values from account present
-	    	$temp_balance = $account_balance + $exp_amount_pre; //old expense amount add into present balance of account
-	    	
-	    	$new_balance = $temp_balance - $exp_amount; //new expense amount dedect from account balance of temporary above
-	    	
+	    	$temp_balance = (float)$account_balance + (float)$exp_amount_pre; //old expense amount add into present balance of account
+
+	    	$new_balance = $temp_balance - (float)$exp_amount; //new expense amount dedect from account balance of temporary above
+
 	    	$up_account_ex = array("balance"=>$new_balance);
-	    	
+
 	    	$db->where('id',$acc_id);
 
 	    	$account_update_id = $db->update ('account', $up_account_ex);
-    	
+
     	}elseif($account_id_old != $acc_id){
     	    // Update values from new account and add old balance to old selected account
-    	    $temp_balance_old = $account_balance_old + $exp_amount_pre; //old expense amount add into present balance of account
+    	    $temp_balance_old = (float)$account_balance_old + (float)$exp_amount_pre; //old expense amount add into present balance of account
     	    $up_account_ex_old = array("balance"=>$temp_balance_old);
-    	
+
     	    $db->where('id',$account_id_old);
 
     	    $account_update_id_old = $db->update ('account', $up_account_ex_old);
-    	    
-    	    $new_temp = $account_balance - $exp_amount;
+
+    	    $new_temp = (float)$account_balance - (float)$exp_amount;
     	    
     	    $up_account_ex_new = array("balance"=>$new_temp);
     	
@@ -1566,7 +1566,7 @@ if(isset($_POST['action'])){
 
                           if($transfers['category'] == 'Income'){
                                 // $receipt = 'Income';
-                                $receipt = $transfers['amount'];
+                                $receipt = (float)$transfers['amount'];
                                 $Balance += $receipt;
                             }else{
                                 $receipt = '';
@@ -1574,15 +1574,15 @@ if(isset($_POST['action'])){
 
                             if($transfers['category'] == 'Expense'){
                                 // $payments = 'Expense';
-                                $payments = $transfers['amount'];
+                                $payments = (float)$transfers['amount'];
                                 $Balance -= $payments;
                             }else{
                                 $payments = '';
                             }
 
                             if($transfers['category'] == 'Funds Transfer From'){
-                              
-                                $transferAmountFrom = $transfers['amount'];
+
+                                $transferAmountFrom = (float)$transfers['amount'];
                                 $Balance -= $transferAmountFrom;
                             }else{
                                 $transferAmountFrom = '';
@@ -1590,18 +1590,18 @@ if(isset($_POST['action'])){
 
                             if ($transfers['category'] == 'Funds Transfer To') {
 
-                                $transferAmount = $transfers['amount'];
+                                $transferAmount = (float)$transfers['amount'];
                                 $Balance += $transferAmount;
                             }else{
                                 $transferAmount = '';
                             }
 
-                            
 
-                            
+
+
 
                         }
-                        $CurrentBalance = $Balance + $Opening_balance;
+                        $CurrentBalance = $Balance + (float)$Opening_balance;
                                                   ?>
                                                   <option value="<?php echo $acc_id; ?>" <?php if($acc_id == $account_id_edit){echo "selected";} ?>><?php echo $acc_account_name.' - '.$acc_bank.' - '.$acc_account_number.'  ('.number_format($CurrentBalance).') '; ?></option>
                                                   <?php } ?>
@@ -1792,32 +1792,32 @@ if(isset($_POST['salary_edit_data'])){
 
     	$salary_update = $db->update ('employee_salary', $up_sal);
     	
-    	$no_salary = $sal_paid - $sal_paid_old;
-    	$new_sal = $sal_paid_old + $no_salary;
-    	
+    	$no_salary = (float)$sal_paid - (float)$sal_paid_old;
+    	$new_sal = (float)$sal_paid_old + $no_salary;
+
     	if($acc_id == $old_ac_id){
-    	
-	    	$acc_old_bl = $account_balance + $sal_paid_old;
+
+	    	$acc_old_bl = (float)$account_balance + (float)$sal_paid_old;
 	    	$new_ac_balance = $acc_old_bl - $new_sal;
-	    	
+
 	    	$up_acc = array("balance"=>$new_ac_balance);
 	    	//var_dump($up_acc);
 	        $db->where("id",$acc_id);
 	        $account_updated = $db->update("account",$up_acc);
-        
+
     	}elseif($acc_id != $old_ac_id){
     	    //put previously paid salary into old account
     	    $db->where('id',$old_ac_id);
 			$old_acco = $db->getOne("account");
-    	    $oldac_balance = $old_acco['balance'];
-    	    $acc_old_bln = $oldac_balance + $sal_paid_old;
+    	    $oldac_balance = (float)$old_acco['balance'];
+    	    $acc_old_bln = $oldac_balance + (float)$sal_paid_old;
     	    $up_acc_old = array("balance"=>$acc_old_bln);
         	//var_dump($up_acc_old);
             $db->where("id",$old_ac_id);
             $account_updated_old = $db->update("account",$up_acc_old);
-            
+
             //put new values into new account
-    	    $new_ac_balance = $account_balance - $sal_paid;
+    	    $new_ac_balance = (float)$account_balance - (float)$sal_paid;
             $up_acc_new = array("balance"=>$new_ac_balance);
         	//var_dump($up_acc_new);
             $db->where("id",$acc_id);

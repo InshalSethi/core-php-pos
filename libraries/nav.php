@@ -100,11 +100,11 @@
 
   $companydata = $db->getOne('company');
 
-  $name = $companydata['name'];
+  $name = !empty($companydata) && isset($companydata['name']) ? $companydata['name'] : '';
 
-  $contact = $companydata['contact'];
+  $contact = !empty($companydata) && isset($companydata['contact']) ? $companydata['contact'] : '';
 
-  $image = $companydata['image'];
+  $image = !empty($companydata) && isset($companydata['image']) ? $companydata['image'] : '';
 
   if($image != ''){
 
@@ -118,19 +118,19 @@
 
 <?php } 
 
-$type = $_SESSION['user_type']; 
+$type = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : '';
 
-$id = $_SESSION['login_id'];
+$id = isset($_SESSION['login_id']) ? $_SESSION['login_id'] : 0;
 
 $db->where("id",$id);
 
 $user_data=$db->getOne("users_tbl");
 
-$employee_id = $user_data['employee_id'];
+$employee_id = !empty($user_data) && isset($user_data['employee_id']) ? $user_data['employee_id'] : 0;
 
-$LoginDate = $_SESSION['LastLoginDate'];
+$LoginDate = isset($_SESSION['LastLoginDate']) ? $_SESSION['LastLoginDate'] : '';
 
-$LoginTime = $_SESSION['LastLoginTime'];
+$LoginTime = isset($_SESSION['LastLoginTime']) ? $_SESSION['LastLoginTime'] : '';
 
 
 
@@ -142,11 +142,11 @@ $db->where("employee_id",$employee_id);
 
 $emp_data=$db->getOne("employee");
 
-$employee_name = $emp_data['name'];
+$employee_name = (is_array($emp_data) && isset($emp_data['name'])) ? $emp_data['name'] : '';
 
-$employee_email = $emp_data['email'];
+$employee_email = (is_array($emp_data) && isset($emp_data['email'])) ? $emp_data['email'] : '';
 
-$image = $emp_data['image'];
+$image = (is_array($emp_data) && isset($emp_data['image'])) ? $emp_data['image'] : '';
 
 ?>
 
@@ -164,7 +164,7 @@ $image = $emp_data['image'];
 
     <div class="no-dis">
 
-      <p class="wel-txt-big">Asalam-O-Alaikum - <?php if($employee_name != ''){ echo $employee_name;}else{ echo $user_data['name'];} ?></p>
+      <p class="wel-txt-big">Asalam-O-Alaikum - <?php if($employee_name != ''){ echo $employee_name;}else{ echo (!empty($user_data) && isset($user_data['name'])) ? $user_data['name'] : 'User';} ?></p>
 
       <p class="wel-txt-sm">Last login: <?php echo $LoginDate.' '.$LoginTime; ?></p>
 
@@ -863,7 +863,7 @@ $image = $emp_data['image'];
 
       <?php } ?>
 
-      <p class="text-center" style="margin-bottom: 0px;"><?php if($employee_name != ''){ echo $employee_name;}else{ echo $user_data['name'];} ?></p>
+      <p class="text-center" style="margin-bottom: 0px;"><?php if($employee_name != ''){ echo $employee_name;}else{ echo (!empty($user_data) && isset($user_data['name'])) ? $user_data['name'] : 'User';} ?></p>
 
       <small class="text-center"><?php if($employee_email != ''){ echo $employee_email;}else{ echo 'No Email';} ?></small>
 

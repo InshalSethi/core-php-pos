@@ -53,7 +53,7 @@
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <div class="noprint">
-        <?php include '../../libraries/nav.php'; ?>
+        <?php //include '../../libraries/nav.php'; ?>
       </div>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
@@ -62,7 +62,7 @@
         <!-- partial -->
         <!-- partial:partials/_sidebar.html -->
       <div class="noprint">
-        <?php include '../../libraries/sidebar.php'; ?>
+        <?php //include '../../libraries/sidebar.php'; ?>
       </div>
         <!-- partial -->
         <div class="main-panel">
@@ -90,7 +90,7 @@
                         <span><?php
                         $db->where("chrt_id",$_REQUEST['acc_dec']);
                         $COAData = $db->getOne("chart_accounts");
-                        $COAName = $COAData['account_name'];
+                        $COAName = ($COAData && isset($COAData['account_name'])) ? $COAData['account_name'] : 'Unknown Account';
                          echo $COAName; 
                          ?>, </span>
                         <?php  } ?>
@@ -187,8 +187,8 @@
     foreach ($JVdata as $JV) {
 
 
-        $total_debit+=$JV['debit'];
-        $total_cedit+=$JV['credit'];
+        $total_debit+=(float)$JV['debit'];
+        $total_cedit+=(float)$JV['credit'];
 
         $JV_id = $JV['j_id'];
         $encrypt = encode($JV_id);
@@ -196,8 +196,8 @@
         $type = $JV['type'];
         $date = $JV['date'];
         $accName = $JV['account_name'];
-        $debit = $JV['debit'];
-        $credit = $JV['credit'];
+        $debit = (float)$JV['debit'];
+        $credit = (float)$JV['credit'];
 ?>
                             <tr>
                               <td class="set-padd text-center tbl-con voucher-no"><?php  echo $voucher_no;?></td>
@@ -211,16 +211,16 @@
                             <tr>
                               <td class="set-padd text-center tbl-con bold" colspan="2"><?php echo 'Showing '.$totalRecords.' entries';?></td>
                               <td class="set-padd text-center tbl-con bold" colspan="2"><?php echo 'Total';?></td>
-                              <td class="set-padd text-center tbl-con bold"><?php echo number_format($total_debit);?></td>
-                              <td class="set-padd text-center tbl-con bold"><?php echo number_format($total_cedit);?></td>
+                              <td class="set-padd text-center tbl-con bold"><?php echo number_format((float)$total_debit);?></td>
+                              <td class="set-padd text-center tbl-con bold"><?php echo number_format((float)$total_cedit);?></td>
                             </tr>
 
                           </tbody>
                         </table>
                       </div>
-                      <?php 
+                      <?php
                           $companydata = $db->getOne('company');
-                          $company_name = $companydata['name']; 
+                          $company_name = ($companydata && isset($companydata['name'])) ? $companydata['name'] : 'Company Name';
                        ?>
                       <div class="fot-set">
                         <div class="inline">

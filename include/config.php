@@ -1,11 +1,11 @@
 <?php 
  session_start();
 
-$username = 'root'; // user name for database
+$username = 'sairauma_madina_clubroad_root'; // user name for database
 
 $host = 'localhost';   // host name for database       
 
-$password = ''; // database password
+$password = 'yKk8JndNATab'; // database password
 
 $dbname = 'sairauma_sairauma_madina_clubroad'; // database name
 

@@ -238,21 +238,21 @@
 
                           if($transfers['category'] == 'sale invoice'){
                               // $receipt = 'Income';
-                              $receipt = $transfers['amount'];
+                              $receipt = (float)$transfers['amount'];
                               $Balance += $receipt;
                           }else{
                               $receipt = '';
                           }
                           if($transfers['category'] == 'receipt voucher'){
                               // $receipt = 'Income';
-                              $receipt = $transfers['amount'];
+                              $receipt = (float)$transfers['amount'];
                               $Balance += $receipt;
                           }else{
                               $receipt = '';
                           }
 
                           if($transfers['category'] == 'payment voucher'){
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
@@ -260,7 +260,7 @@
 
                           if($transfers['category'] == 'Expense'){
                               // $payments = 'Expense';
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
@@ -268,15 +268,15 @@
 
                           if($transfers['category'] == 'purchase invoice'){
                               // $payments = 'Expense';
-                              $payments = $transfers['amount'];
+                              $payments = (float)$transfers['amount'];
                               $Balance -= $payments;
                           }else{
                               $payments = '';
                           }
 
                           if($transfers['category'] == 'Funds Transfer From'){
-                            
-                              $transferAmountFrom = $transfers['amount'];
+
+                              $transferAmountFrom = (float)$transfers['amount'];
                               $Balance -= $transferAmountFrom;
                           }else{
                               $transferAmountFrom = '';
@@ -284,18 +284,18 @@
 
                           if ($transfers['category'] == 'Funds Transfer To') {
 
-                              $transferAmount = $transfers['amount'];
+                              $transferAmount = (float)$transfers['amount'];
                               $Balance += $transferAmount;
                           }else{
                               $transferAmount = '';
                           }
 
-                            
 
-                            
+
+
 
                         }
-                        $CurrentBalance = $Balance + $Opening_balance;
+                        $CurrentBalance = $Balance + (float)$Opening_balance;
                                                   ?>
                                                   <option value="<?php echo $acc_id; ?>"><?php echo $acc_account_name.' - '.$acc_bank.' - '.$acc_account_number.'  ('.number_format($CurrentBalance).') '; ?></option>
                                                   <?php } ?>

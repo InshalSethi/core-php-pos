@@ -39,7 +39,7 @@
             $Total_exp_amount = 0;
             $expensesValdata = $db->get("expenses");
             foreach ($expensesValdata as $expensesVal) {
-              $Total_exp_amount += $expensesVal['amount'];
+              $Total_exp_amount += (float)$expensesVal['amount'];
             }
 ?>
 <script type="text/javascript">
@@ -107,21 +107,25 @@
                 $exp_category = $expenses['category'];
                 $db->where("id",$exp_type_id);
                 $exp_typedata = $db->getOne("exp_type");
-                $exp_type_name = $exp_typedata['type_name'];
+                $exp_type_name = ($exp_typedata && isset($exp_typedata['type_name'])) ? $exp_typedata['type_name'] : 'Unknown Type';
 
 
                 $db->where("id",$exp_acc_id);
                 $AccData = $db->getOne("account");
-                $AccNumber = $AccData['account_number'];
+                $AccNumber = ($AccData && isset($AccData['account_number'])) ? $AccData['account_number'] : 'Unknown Account';
 
                 $db->where("id",$SalId);
                 $SalaryData = $db->getOne("employee_salary");
-                $EmplId = $SalaryData['employee_id'];
-                $EmplEncode = encode($EmplId);
+                $EmplId = ($SalaryData && isset($SalaryData['employee_id'])) ? $SalaryData['employee_id'] : null;
+                $EmplEncode = $EmplId ? encode($EmplId) : '';
 
-                $db->where("employee_id",$EmplId);
-                $EmplData = $db->getOne("employee");
-                $EmplName = $EmplData['name'];
+                if ($EmplId) {
+                    $db->where("employee_id",$EmplId);
+                    $EmplData = $db->getOne("employee");
+                    $EmplName = ($EmplData && isset($EmplData['name'])) ? $EmplData['name'] : 'Unknown Employee';
+                } else {
+                    $EmplName = 'Unknown Employee';
+                }
                 ?>
                 <tr>
                   <td class="td1-set text-center"><?php echo $exp_voucher;?></td>
