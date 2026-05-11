@@ -36,51 +36,49 @@ $page_title='Inventory | Rate Revision';
 							$method=$_POST['method'];
 							$rate=$_POST['rate'];
 
+							if(!is_numeric($rate) || (float)$rate < 0)
+							{
+								echo "<div class='alert alert-fill-danger' role='alert'><i class='mdi mdi-alert-circle'></i>Please enter a valid numeric rate.</div>";
+							}else{
+
 							$time_zone = date_default_timezone_set("Asia/Karachi");
 							$date = date("Y-m-d");
 
 							$db->where("pro_domain",$pro_domain);
 							$db->where("company_name",$company);
 							$db->where("category_id",$category);
+							$db->where("is_delete",'0');
       						$products = $db->get("tbl_products");
 
-							if($type == "increase")
+							if($products && is_array($products))
+							{
+								if($type == "increase")
 							{
 								if($method == "flat"){
 									
 		      						foreach ($products as $product) {
-		      							$sellPrice = 0;
-		      							$retailPrice = 0;
-
-		      							$sellPrice = $product['sell_price']+$rate;
-		      							$retailPrice = $product['retail_price']+$rate;
-
-		      							// var_dump($sellPrice,$retailPrice);die();
+		      							$sellPrice = (float)$product['sell_price'] + (float)$rate;
+		      							$retailPrice = (float)$product['retail_price'] + (float)$rate;
 
 		      							$up_arr = array(
-											"sell_price"=>$sellPrice,
-											"retail_price"=>$retailPrice,
+											"sell_price"=>round($sellPrice, 2),
+											"retail_price"=>round($retailPrice, 2),
 											"last_update"=>$date,
 										);
-		      							$db->where("id",$product['id']);
+		      							$db->where("pro_id",$product['pro_id']);
 										$db->update("tbl_products",$up_arr);
 		      						}
 								}else{
 									foreach ($products as $product) {
-		      							$sellPrice = 0;
-		      							$retailPrice = 0;
-
-		      							$sellPrice = (($rate / 100) * $product['sell_price'])+$product['sell_price'];
-		      							$retailPrice = (($rate / 100) * $product['retail_price'])+$product['retail_price'];
-
-		      							// var_dump($sellPrice,$retailPrice);die();
+		      							$sellPrice = (( (float)$rate / 100) * (float)$product['sell_price']) + (float)$product['sell_price'];
+		      							$retailPrice = (( (float)$rate / 100) * (float)$product['retail_price']) + (float)$product['retail_price'];
 
 		      							$up_arr = array(
-											"sell_price"=>$sellPrice,
-											"retail_price"=>$retailPrice,
+											"sell_price"=>round($sellPrice, 2),
+											"retail_price"=>round($retailPrice, 2),
 											"last_update"=>$date,
 										);
-		      							$db->where("id",$product['id']);
+		      							$db->where("pro_id",$product['pro_id']);
 										$db->update("tbl_products",$up_arr);
 		      						}
 								}
@@ -88,45 +86,35 @@ $page_title='Inventory | Rate Revision';
 								if($method == "flat"){
 
 		      						foreach ($products as $product) {
-		      							$sellPrice = 0;
-		      							$retailPrice = 0;
-
-		      							$sellPrice = $product['sell_price']-$rate;
-		      							$retailPrice = $product['retail_price']-$rate;
-
-		      							// var_dump($sellPrice,$retailPrice);die();
+		      							$sellPrice = (float)$product['sell_price'] - (float)$rate;
+		      							$retailPrice = (float)$product['retail_price'] - (float)$rate;
 
 		      							$up_arr = array(
-											"sell_price"=>$sellPrice,
-											"retail_price"=>$retailPrice,
+											"sell_price"=>round($sellPrice, 2),
+											"retail_price"=>round($retailPrice, 2),
 											"last_update"=>$date,
 										);
-		      							$db->where("id",$product['id']);
+		      							$db->where("pro_id",$product['pro_id']);
 										$db->update("tbl_products",$up_arr);
 		      						}
 								}else{
 									foreach ($products as $product) {
-		      							$sellPrice = 0;
-		      							$retailPrice = 0;
-
-		      							$sellPrice = $product['sell_price']-(($rate / 100) * $product['sell_price']);
-		      							$retailPrice = $product['retail_price']-(($rate / 100) * $product['retail_price']);
-
-		      							// var_dump($sellPrice,$retailPrice);die();
+		      							$sellPrice = (float)$product['sell_price'] - (( (float)$rate / 100) * (float)$product['sell_price']);
+		      							$retailPrice = (float)$product['retail_price'] - (( (float)$rate / 100) * (float)$product['retail_price']);
 
 		      							$up_arr = array(
-											"sell_price"=>$sellPrice,
-											"retail_price"=>$retailPrice,
+											"sell_price"=>round($sellPrice, 2),
+											"retail_price"=>round($retailPrice, 2),
 											"last_update"=>$date,
 										);
-		      							$db->where("id",$product['id']);
+		      							$db->where("pro_id",$product['pro_id']);
 										$db->update("tbl_products",$up_arr);
 		      						}
 								}
+								}
 							}
-							
 							echo "<div class='alert alert-fill-success' role='alert'><i class='mdi mdi-alert-circle'></i>Data Updated Successfully.</div>";
-
+							}
 						}
 						?>
 
@@ -230,7 +218,7 @@ $page_title='Inventory | Rate Revision';
 															<div class="input-group-prepend">
 																<span class="input-group-text in-grp"><i class="mdi mdi-rename-box"></i></span>
 															</div>
-															<input type="number" min="0" name="rate" class="form-control" required placeholder="Enter Number"/>
+															<input type="number" step="any" min="0" name="rate" class="form-control" required placeholder="Enter Number" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46"/>
 														</div>
 													</div>
 												</div>
