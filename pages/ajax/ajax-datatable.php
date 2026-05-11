@@ -158,7 +158,7 @@
 
                         "inv_date"=> ChangeFormate($in_da['in_date']) ,
 
-                        "total_amount"=>number_format($in_da['grand_total']),
+                        "total_amount"=>number_format((float)$in_da['grand_total']),
 
                         "action"=>$html
 
@@ -336,7 +336,7 @@
 
           "date"=>ChangeFormate($in_da['p_inv_date']),
 
-          "total"=>number_format($in_da['grand_total']),
+          "total"=>number_format((float)$in_da['grand_total']),
 
           "action"=>$html,
 
@@ -616,7 +616,7 @@
 
           "date"=> ChangeFormate($order['order_date']),
 
-          "total"=>number_format($order['grand_total']),
+          "total"=>number_format((float)$order['grand_total']),
 
           "invoice"=>$invoice,
 
@@ -756,7 +756,7 @@
 
           "asset_type"=>$pro['type_name'] ,
 
-          "asset_amount"=>number_format($pro['as_amount']),
+          "asset_amount"=>number_format((float)$pro['as_amount']),
 
           "asset_date"=>ChangeFormate($pro['as_date']),
 
@@ -764,7 +764,7 @@
 
       );
 
-      $total_assets+=$pro['as_amount'];
+      $total_assets+=(float)$pro['as_amount'];
 
       $i++;
 
@@ -934,11 +934,11 @@
 
           "inv_date"=> ChangeFormate($in_da['in_date']) ,
 
-          "total_amount"=>number_format($in_da['grand_total']),
+          "total_amount"=>number_format((float)$in_da['grand_total']),
 
-          "paid_amount"=>number_format($in_da['paid_amount']),
+          "paid_amount"=>number_format((float)$in_da['paid_amount']),
 
-          "pending_amount"=>number_format($in_da['total_due']),
+          "pending_amount"=>number_format((float)$in_da['total_due']),
 
           "action"=>$html
 
@@ -1177,13 +1177,13 @@
 
           "date"=>ChangeFormate($in_da['p_inv_date']),
 
-          "total"=>number_format($in_da['grand_total']),
+          "total"=>number_format((float)$in_da['grand_total']),
 
-          "discount"=>number_format($in_da['total_dis']),
+          "discount"=>number_format((float)$in_da['total_dis']),
 
-          "paid"=>number_format($in_da['paid_amount']),
+          "paid"=>number_format((float)$in_da['paid_amount']),
 
-          "pending"=>number_format($in_da['total_due']),
+          "pending"=>number_format((float)$in_da['total_due']),
 
           "action"=>$html,
 
@@ -1805,7 +1805,7 @@
 
           "exp_type"=>$pro['type_name'] ,
 
-          "exp_amount"=>number_format($pro['exp_amount']),
+          "exp_amount"=>number_format((float)$pro['exp_amount']),
 
           "exp_date"=>ChangeFormate($pro['exp_date']),
 
@@ -1938,7 +1938,7 @@
 
           "note"=>$pro['payment_note'],
 
-          "total_amount"=>number_format($pro['amount']),
+          "total_amount"=>number_format((float)$pro['amount']),
 
           "action"=>$html,
 
@@ -2090,7 +2090,7 @@
 
           "date"=>ChangeFormate($pro['date']),
 
-          "total_amount"=>number_format($pro['amount']),
+          "total_amount"=>number_format((float)$pro['amount']),
 
           "note"=>$pro['payment_note'],
 
@@ -2153,18 +2153,18 @@
 
       }
 
-      foreach($result as $da){ 
+      foreach($result as $da){
         $totalRecords++;
 
         if($da['status'] == 'PURCHASE'){
-          $total_receiveAble+=$da['total_amount'];
-          $total_received+=$da['received_amount'];
-        } 
+          $total_receiveAble+=(float)$da['total_amount'];
+          $total_received+=(float)$da['received_amount'];
+        }
         if ($da['status'] == 'CASH_PAYMENT') {
-          $total_received+=$da['received_amount'];
+          $total_received+=(float)$da['received_amount'];
         }
         if($da['status'] == 'PURCHASE_RETURN'){
-          $total_received+=$da['received_amount'];
+          $total_received+=(float)$da['received_amount'];
         }
       }
 
@@ -2266,17 +2266,17 @@
 
       }
 
-      foreach($result as $da){ 
+      foreach($result as $da){
         $totalRecords++;
         if($da['status'] == 'SALE'){
-          $total_receiveAble+=$da['total_amount'];
-          $total_received+=$da['received_amount'];
-        } 
+          $total_receiveAble+=(float)$da['total_amount'];
+          $total_received+=(float)$da['received_amount'];
+        }
         if ($da['status'] == 'CASH_RECEIVED') {
-          $total_received+=$da['received_amount'];
+          $total_received+=(float)$da['received_amount'];
         }
         if($da['status'] == 'SALE_RETURN'){
-          $total_received+=$da['received_amount'];
+          $total_received+=(float)$da['received_amount'];
         }
       }
 

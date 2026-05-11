@@ -1,6 +1,7 @@
 <?php
 // permission code
-
+// var_dump('here');
+// die();
 // Check if session variables exist to prevent PHP 8.3 warnings
 $login_id = isset($_SESSION['login_id']) ? $_SESSION['login_id'] : null;
 $permissions = array(); // Initialize as empty array

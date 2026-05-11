@@ -1,0 +1,12 @@
+[09-May-2026 14:11:18 UTC] PHP Warning:  Undefined array key "login_id" in /home/sairauma/clubroad.madinapaints.com/pages/settings/chart-of-accounts.php on line 39
+[09-May-2026 14:11:18 UTC] PHP Warning:  Trying to access array offset on null in /home/sairauma/clubroad.madinapaints.com/include/functions.php on line 1380
+[09-May-2026 14:11:19 UTC] PHP Warning:  Undefined array key "login_id" in /home/sairauma/clubroad.madinapaints.com/pages/settings/account-group.php on line 39
+[09-May-2026 14:11:19 UTC] PHP Warning:  Trying to access array offset on null in /home/sairauma/clubroad.madinapaints.com/include/functions.php on line 1380
+[09-May-2026 14:11:21 UTC] PHP Warning:  Undefined array key "login_id" in /home/sairauma/clubroad.madinapaints.com/pages/settings/account-type.php on line 39
+[09-May-2026 14:11:21 UTC] PHP Warning:  Trying to access array offset on null in /home/sairauma/clubroad.madinapaints.com/include/functions.php on line 1380
+[09-May-2026 14:11:49 UTC] PHP Warning:  Undefined array key "login_id" in /home/sairauma/clubroad.madinapaints.com/pages/settings/chart-of-accounts.php on line 39
+[09-May-2026 14:11:49 UTC] PHP Warning:  Trying to access array offset on null in /home/sairauma/clubroad.madinapaints.com/include/functions.php on line 1380
+[09-May-2026 14:11:51 UTC] PHP Warning:  Undefined array key "login_id" in /home/sairauma/clubroad.madinapaints.com/pages/settings/account-group.php on line 39
+[09-May-2026 14:11:51 UTC] PHP Warning:  Trying to access array offset on null in /home/sairauma/clubroad.madinapaints.com/include/functions.php on line 1380
+[09-May-2026 14:11:52 UTC] PHP Warning:  Undefined array key "login_id" in /home/sairauma/clubroad.madinapaints.com/pages/settings/account-type.php on line 39
+[09-May-2026 14:11:52 UTC] PHP Warning:  Trying to access array offset on null in /home/sairauma/clubroad.madinapaints.com/include/functions.php on line 1380

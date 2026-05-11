@@ -7,7 +7,7 @@ $host = 'localhost';   // host name for database
 
 $password = ''; // database password
 
-$dbname = 'sairauma_sairauma_madina_clubroad'; // database name
+$dbname = 'paints_db'; // database name
 
 
 $db = new MysqliDb ($host, $username, $password, $dbname);

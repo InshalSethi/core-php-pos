@@ -3,7 +3,7 @@ class database{
 	private $host="localhost";
 	private $username="root";
 	private $password='';
-	private $database="sairauma_sairauma_madina_clubroad";
+	private $database="paints_db";
 	protected $conn;
 	    
     public function __construct()
